@@ -1,2 +1,2 @@
-# badminton-tool
-バドミントン分组ツール
+# badminton-toolCHN
+羽毛球分组工具CHN
