@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>羽毛球分组工具</title>
   <style>
-    /* 保留原样样式 */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       padding: 20px;
@@ -123,15 +122,12 @@
       .flex-row {
         flex-direction: column;
       }
-
       h2 {
         font-size: 22px;
       }
-
       input, textarea, button {
         font-size: 16px;
       }
-
       label {
         font-size: 16px;
       }
@@ -140,6 +136,11 @@
     .bold-text {
       font-weight: bold;
       color: black;
+    }
+
+    #shareLink {
+      margin-top: 5px;
+      width: 100%;
     }
   </style>
 </head>
@@ -150,7 +151,7 @@
   </header>
 
   <div class="inputs">
-    <label>球场数量：<input type="number" id="courtCount" min="1" /></label>
+    <label>球场数：<input type="number" id="courtCount" min="1" /></label>
     <label>总回合数：<input type="number" id="totalRounds" min="1" value="1" /></label>
 
     <div class="flex-row">
@@ -166,7 +167,7 @@
 
     <div class="input-group">
       <label>中途加入玩家（每行一个）：</label>
-      <textarea id="additionalPlayers" rows="2" placeholder="SHI YUQI"></textarea>
+      <textarea id="additionalPlayers" rows="2" placeholder="LINDAN\SHI YUQI"></textarea>
     </div>
 
     <div class="flex-row">
@@ -181,6 +182,9 @@
     </div>
 
     <button onclick="generateRounds()">🎯 生成比赛</button>
+    <button onclick="generateShareLink()">🔗 生成分享链接</button>
+    <button onclick="copyShareLink()">📋 复制链接</button>
+    <input type="text" id="shareLink" readonly />
   </div>
 
   <div class="result" id="output"></div>
@@ -201,7 +205,6 @@
       ];
       let minDiff = Infinity;
       let best = null;
-
       combos.forEach(c => {
         let a = [group[c[0]], group[c[1]]];
         let b = [group[c[2]], group[c[3]]];
@@ -250,29 +253,28 @@
 
       let fullHtml = "";
 
-      for (let roundNumber = 1; roundNumber <= totalRounds * 2; roundNumber++) {
+      for (let roundNumber = 1; roundNumber <= totalRounds ; roundNumber++) {
         let availablePlayers = [...originalPlayers];
         lateJoiners.forEach(p => {
           if (roundNumber >= p[2]) availablePlayers.push([p[0], p[1]]);
         });
 
         availablePlayers.sort((a, b) => playCountMap[a[0]] - playCountMap[b[0]]);
-
         const selectedPlayers = availablePlayers.slice(0, courtCount * 4);
 
-        let html = `<h3>第 ${roundNumber} 回合</h3>`;
-        html += "<table><tr><th>球场</th><th>队伍 A</th><th>队伍 B</th><th>A-B 差值</th></tr>";
+        let html = `<h3>第 ${roundNumber} ラウンド</h3>`;
+        html += "<table><tr><th>コート</th><th>チーム A</th><th>チーム B</th><th>A-B 差</th></tr>";
 
         for (let i = 0; i < courtCount; i++) {
           let group = selectedPlayers.slice(i * 4, i * 4 + 4);
           if (group.length < 4) {
-            html += `<tr><td>球场 ${i + 1}</td><td colspan="2">自由练习</td><td>无</td></tr>`;
+            html += `<tr><td>コート ${i + 1}</td><td colspan="2">自由练习</td><td>なし</td></tr>`;
             continue;
           }
           const [a, b, diff] = bestBalancedSplit(group);
           a.forEach(player => playCountMap[player[0]]++);
           b.forEach(player => playCountMap[player[0]]++);
-          html += `<tr><td>球场 ${i + 1}</td><td><span class="bold-text">${a[0][0]} & ${a[1][0]}</span></td><td><span class="bold-text">${b[0][0]} & ${b[1][0]}</span></td><td><span class="bold-text">${diff}</span></td></tr>`;
+          html += `<tr><td>コート ${i + 1}</td><td><span class="bold-text">${a[0][0]} & ${a[1][0]}</span></td><td><span class="bold-text">${b[0][0]} & ${b[1][0]}</span></td><td><span class="bold-text">${diff}</span></td></tr>`;
         }
 
         html += "</table>";
@@ -287,6 +289,51 @@
 
       output.innerHTML = fullHtml;
     }
+
+    function generateShareLink() {
+      const courtCount = document.getElementById("courtCount").value;
+      const totalRounds = document.getElementById("totalRounds").value;
+      const playerNames = encodeURIComponent(document.getElementById("playerNames").value.trim());
+      const playerLevels = encodeURIComponent(document.getElementById("playerLevels").value.trim());
+      const additionalPlayers = encodeURIComponent(document.getElementById("additionalPlayers").value.trim());
+      const additionalLevels = encodeURIComponent(document.getElementById("additionalLevels").value.trim());
+      const additionalCourt = document.getElementById("additionalCourt").value;
+
+      const params = new URLSearchParams({
+        court: courtCount,
+        rounds: totalRounds,
+        names: playerNames,
+        levels: playerLevels,
+        addNames: additionalPlayers,
+        addLevels: additionalLevels,
+        addStart: additionalCourt
+      });
+
+      const shareURL = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+      document.getElementById("shareLink").value = shareURL;
+    }
+
+    function copyShareLink() {
+      const linkInput = document.getElementById("shareLink");
+      linkInput.select();
+      linkInput.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      alert("链接已复制到剪贴板！");
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.has("names")) {
+        document.getElementById("courtCount").value = params.get("court") || 1;
+        document.getElementById("totalRounds").value = params.get("rounds") || 1;
+        document.getElementById("playerNames").value = decodeURIComponent(params.get("names") || "");
+        document.getElementById("playerLevels").value = decodeURIComponent(params.get("levels") || "");
+        document.getElementById("additionalPlayers").value = decodeURIComponent(params.get("addNames") || "");
+        document.getElementById("additionalLevels").value = decodeURIComponent(params.get("addLevels") || "");
+        document.getElementById("additionalCourt").value = params.get("addStart") || "";
+        generateRounds();
+      }
+    });
   </script>
 </body>
 </html>
