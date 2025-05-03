@@ -146,7 +146,7 @@
 <body>
   <header>
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaFxuFtnA0V3zsmO_XSDUVFhbErsh_851E8w&s" alt="Logo">
-    <h2>🏸 羽毛球分组工具</h2>
+    <h2> 羽毛球分组工具</h2>
   </header>
 
   <div class="inputs">
@@ -160,7 +160,7 @@
       </div>
       <div class="flex-child input-group">
         <label>对应水平（数字1-10 初学1，最高级10，空则自动分配）：</label>
-        <textarea id="playerLevels" rows="3" placeholder="7\n6\n8"></textarea>
+        <textarea id="playerLevels" rows="3" placeholder="7\6\8"></textarea>
       </div>
     </div>
 
@@ -250,7 +250,7 @@
 
       let fullHtml = "";
 
-      for (let roundNumber = 1; roundNumber <= totalRounds * 2; roundNumber++) {  <!-- Changed rounds to double -->
+      for (let roundNumber = 1; roundNumber <= totalRounds ; roundNumber++) {  <!-- Changed rounds to double -->
         let availablePlayers = [...originalPlayers];
         lateJoiners.forEach(p => {
           if (roundNumber >= p[2]) availablePlayers.push([p[0], p[1]]);
