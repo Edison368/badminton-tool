@@ -262,19 +262,19 @@
         availablePlayers.sort((a, b) => playCountMap[a[0]] - playCountMap[b[0]]);
         const selectedPlayers = availablePlayers.slice(0, courtCount * 4);
 
-        let html = `<h3>第 ${roundNumber} ラウンド</h3>`;
-        html += "<table><tr><th>コート</th><th>チーム A</th><th>チーム B</th><th>A-B 差</th></tr>";
+        let html = `<h3>第 ${roundNumber} 场</h3>`;
+        html += "<table><tr><th>场地</th><th>TEAM A</th><th>TEAM B</th><th>A-B 差</th></tr>";
 
         for (let i = 0; i < courtCount; i++) {
           let group = selectedPlayers.slice(i * 4, i * 4 + 4);
           if (group.length < 4) {
-            html += `<tr><td>コート ${i + 1}</td><td colspan="2">自由练习</td><td>なし</td></tr>`;
+            html += `<tr><td>场地 ${i + 1}</td><td colspan="2">自由练习</td><td>なし</td></tr>`;
             continue;
           }
           const [a, b, diff] = bestBalancedSplit(group);
           a.forEach(player => playCountMap[player[0]]++);
           b.forEach(player => playCountMap[player[0]]++);
-          html += `<tr><td>コート ${i + 1}</td><td><span class="bold-text">${a[0][0]} & ${a[1][0]}</span></td><td><span class="bold-text">${b[0][0]} & ${b[1][0]}</span></td><td><span class="bold-text">${diff}</span></td></tr>`;
+          html += `<tr><td>场地 ${i + 1}</td><td><span class="bold-text">${a[0][0]} & ${a[1][0]}</span></td><td><span class="bold-text">${b[0][0]} & ${b[1][0]}</span></td><td><span class="bold-text">${diff}</span></td></tr>`;
         }
 
         html += "</table>";
