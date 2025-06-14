@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="zh">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>バドミントンチーム分けAPP</title>
+  <title>羽毛球分组工具</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -444,7 +444,7 @@
       margin-top: 5px;
     }
 
-    /* レベルスライダーのスタイル */
+    /* 级别滑块样式 */
     .level-slider-container {
       display: flex;
       align-items: center;
@@ -494,7 +494,7 @@
       background-color: #fffde7;
     }
     
-    /* 固定ペア用スタイル */
+    /* 固定配对样式 */
     .fixed-pair-controls {
       background-color: #f8f9fa;
       padding: 15px;
@@ -536,7 +536,7 @@
       background-color: #e8f5e9;
     }
     
-    /* 参加ROUND用スタイル */
+    /* 参加轮次样式 */
     .join-round-controls {
       background-color: #f8f9fa;
       padding: 15px;
@@ -573,173 +573,435 @@
     #addJoinRoundBtn:hover {
       background-color: #7B1FA2;
     }
+
+    /* 团队注册样式 */
+    .team-registration {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #dee2e6;
+    }
+
+    .team-list {
+      margin-top: 20px;
+    }
+
+    .team-item {
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border: 1px solid #dee2e6;
+    }
+
+    .team-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .team-name {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .team-members {
+      margin-top: 10px;
+    }
+
+    .member-item {
+      display: flex;
+      align-items: center;
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .member-item:last-child {
+      border-bottom: none;
+    }
+
+    .member-checkbox {
+      margin-right: 10px;
+    }
+
+    .member-details {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .member-name {
+      font-weight: bold;
+    }
+
+    .member-level {
+      color: #666;
+    }
+
+    .member-gender {
+      color: #666;
+    }
+
+    .team-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .team-actions button {
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+
+    .team-form {
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .member-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .member-form input, .member-form select {
+      flex: 1;
+    }
+
+    .add-member-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add-member-btn:hover {
+      background-color: #45a049;
+    }
+
+    .save-team-btn {
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .save-team-btn:hover {
+      background-color: #0b7dda;
+    }
+
+    .delete-team-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .delete-team-btn:hover {
+      background-color: #c82333;
+    }
+
+    .team-selector {
+      margin-bottom: 20px;
+    }
+
+    .team-selector select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .selected-members {
+      margin-top: 20px;
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border: 1px solid #dee2e6;
+    }
+
+    .selected-members h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .selected-members-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .selected-members-list li {
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .selected-members-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* 批量选择/清除按钮样式 */
+    .batch-selection-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .batch-selection-buttons button {
+      flex: 1;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+
+    #selectAllMembers {
+      background-color: #4CAF50;
+    }
+
+    #clearSelectedMembers {
+      background-color: #dc3545;
+    }
+
+    #clearRegisteredPlayers {
+      background-color: #dc3545;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
   <header>
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaFxuFtnA0V3zsmO_XSDUVFhbErsh_851E8w&s" alt="Logo">
-    <h2>🏸 バドミントンチーム分けツール</h2>
+    <h2>🏸 羽毛球分组工具</h2>
   </header>
 
   <div class="tab-container">
-    <button class="tab active" onclick="openTab(event, 'eventTab')">イベント登録</button>
-    <button class="tab" onclick="openTab(event, 'teamTab')">チーム分け</button>
+    <button class="tab active" onclick="openTab(event, 'teamRegistrationTab')">团队注册</button>
+    <button class="tab" onclick="openTab(event, 'eventTab')">活动注册</button>
+    <button class="tab" onclick="openTab(event, 'teamTab')">团队分组</button>
   </div>
 
-  <!-- イベント登録タブ -->
-  <div id="eventTab" class="tab-content active">
+  <!-- 团队注册标签页 -->
+  <div id="teamRegistrationTab" class="tab-content active">
+    <div class="team-registration">
+      <h3>团队注册</h3>
+      
+      <div class="team-form">
+        <div class="form-group">
+          <label for="teamName">团队名称:</label>
+          <input type="text" id="teamName" placeholder="输入团队名称">
+        </div>
+        
+        <h4>添加成员</h4>
+        <div class="member-form">
+          <input type="text" id="memberName" placeholder="姓名">
+          <select id="memberGender">
+            <option value="male">男</option>
+            <option value="female">女</option>
+          </select>
+          <input type="number" id="memberLevel" min="1" max="5" value="3" placeholder="水平">
+          <button class="add-member-btn" onclick="addMemberToTeam()">添加</button>
+        </div>
+        
+        <div id="teamMembersList">
+          <!-- 添加的成员将显示在这里 -->
+        </div>
+        
+        <button class="save-team-btn" onclick="saveTeam()">保存团队</button>
+      </div>
+      
+      <div class="team-list" id="teamList">
+        <!-- 注册的团队将显示在这里 -->
+      </div>
+    </div>
+    
+    <div class="team-selector">
+      <h3>选择团队</h3>
+      <select id="teamSelector" onchange="loadTeamMembers()">
+        <option value="">请选择团队</option>
+      </select>
+    </div>
+    
+    <div class="selected-members">
+      <h3>已选成员</h3>
+      <div class="batch-selection-buttons">
+        <button id="selectAllMembers" onclick="selectAllMembers()">全选成员</button>
+        <button id="clearSelectedMembers" onclick="clearSelectedMembers()">清除选择</button>
+      </div>
+      <ul class="selected-members-list" id="selectedMembersList">
+        <!-- 选择的成员将显示在这里 -->
+      </ul>
+      <button onclick="addSelectedMembersToEvent()">将选中成员添加到活动</button>
+    </div>
+  </div>
+
+  <!-- 活动注册标签页 -->
+  <div id="eventTab" class="tab-content">
     <div class="event-form">
-      <h3>イベント情報</h3>
+      <h3>活动信息</h3>
       <div class="form-row">
         <div class="form-group">
-          <label>イベント名:</label>
-          <input type="text" id="eventName" placeholder="バドミントン交流会">
+          <label>活动名称:</label>
+          <input type="text" id="eventName" placeholder="羽毛球交流会">
         </div>
         <div class="form-group">
-          <label>場所:</label>
-          <input type="text" id="eventLocation" placeholder="スポーツセンター">
+          <label>地点:</label>
+          <input type="text" id="eventLocation" placeholder="体育中心">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>日付:</label>
+          <label>日期:</label>
           <input type="date" id="eventDate">
         </div>
         <div class="form-group">
-          <label>時間:</label>
+          <label>时间:</label>
           <input type="time" id="eventTime">
         </div>
       </div>
     </div>
 
-    <h3>プレイヤー登録</h3>
+    <h3>球员注册</h3>
     <div class="flex-row">
       <div class="flex-child input-group">
-        <label>プレイヤー名:</label>
-        <input type="text" id="newPlayerName" placeholder="名前を入力">
+        <label>球员姓名:</label>
+        <input type="text" id="newPlayerName" placeholder="输入姓名">
       </div>
       <div class="flex-child input-group">
-        <label>レベル:</label>
+        <label>水平:</label>
         <div class="level-slider-container">
           <input type="range" id="newPlayerLevel" class="level-slider" min="1" max="5" value="3" step="1">
           <span id="levelDisplay" class="level-value">3</span>
         </div>
         <div class="level-marks">
-          <span class="level-mark">初心者</span>
-          <span class="level-mark">中級</span>
-          <span class="level-mark">上級</span>
+          <span class="level-mark">初级</span>
+          <span class="level-mark">中级</span>
+          <span class="level-mark">高级</span>
         </div>
       </div>
       <div class="flex-child input-group">
-        <label>性別:</label>
+        <label>性别:</label>
         <select id="newPlayerGender">
-          <option value="male">男性</option>
-          <option value="female">女性</option>
+          <option value="male">男</option>
+          <option value="female">女</option>
         </select>
       </div>
       <div class="flex-child input-group">
-        <label>参加ROUND:</label>
-        <input type="number" id="newPlayerJoinRound" min="1" value="1" placeholder="参加開始ラウンド">
+        <label>参加轮次:</label>
+        <input type="number" id="newPlayerJoinRound" min="1" value="1" placeholder="开始参加的轮次">
       </div>
     </div>
-    <button onclick="addPlayer()">プレイヤーを登録</button>
+    <button onclick="addPlayer()">注册球员</button>
+    <button id="clearRegisteredPlayers" onclick="clearRegisteredPlayers()">清除所有注册球员</button>
 
-    <h3>登録済みプレイヤー</h3>
+    <h3>已注册球员</h3>
     <table class="player-table">
       <thead>
         <tr>
-          <th>名前</th>
-          <th>レベル</th>
-          <th>性別</th>
-          <th>参加ROUND</th>
+          <th>姓名</th>
+          <th>水平</th>
+          <th>性别</th>
+          <th>参加轮次</th>
           <th>操作</th>
         </tr>
       </thead>
       <tbody id="registeredPlayers">
-        <!-- 登録されたプレイヤーがここに表示されます -->
+        <!-- 注册的球员将显示在这里 -->
       </tbody>
     </table>
 
-    <button onclick="goToTeamDivision()" style="margin-top: 20px; background-color: #2196F3;">チーム分けページへ進む</button>
+    <button onclick="goToTeamDivision()" style="margin-top: 20px; background-color: #2196F3;">前往分组页面</button>
   </div>
 
-  <!-- チーム分けタブ -->
+  <!-- 团队分组标签页 -->
   <div id="teamTab" class="tab-content">
     <div class="inputs">
-      <label>コート数：<input type="number" id="courtCount" min="1" /></label>
-      <label>総ラウンド数：<input type="number" id="totalRounds" min="1" value="1" /></label>
+      <label>场地数量：<input type="number" id="courtCount" min="1" /></label>
+      <label>总轮次数：<input type="number" id="totalRounds" min="1" value="1" /></label>
 
       <div class="flex-row">
         <div class="flex-child input-group">
-          <label>プレイヤー名（1行につき1名）：</label>
-          <textarea id="playerNames" rows="3" placeholder="李雨辰\n张馨月\n崔嘉言\n蒋梓睿\n白昊天\n唐芷若\n林语嫣\n韩子豪\n郭\n林ダン\nLCW\n桃田\n山口あかね\n宮崎友香\nなお\nかおり\n原玲か\nキム\n橋"></textarea>
+          <label>球员姓名（每行一个）：</label>
+          <textarea id="playerNames" rows="3" placeholder="李雨辰\n张馨月\n崔嘉言\n蒋梓睿\n白昊天\n唐芷若\n林语嫣\n韩子豪\n郭\n林丹\nLCW\n桃田\n山口茜\n宫崎友香\n奈绪\n香织\n原玲佳\n金\n桥"></textarea>
         </div>
         <div class="flex-child input-group">
-          <label>レベル（1-5、省略で自動割当）：</label>
+          <label>水平（1-5，留空自动分配）：</label>
           <textarea id="playerLevels" rows="3" placeholder="3\n2\n4\n2\n3\n2\n2\n4\n3\n5\n5\n4\n3\n2\n2\n2\n3\n4\n2"></textarea>
         </div>
         <div class="flex-child input-group">
-          <label>性別（male/female、1行につき1名）：</label>
-          <textarea id="playerGenders" rows="3" placeholder="male\nfemale\nmale\nfemale\nmale\nfemale\nfemale\nmale\nmale\nmale\nmale\nmale\nfemale\nfemale\nfemale\nfemale\nfemale\nfemale\nfemale"></textarea>
+          <label>性别（男/女，每行一个）：</label>
+          <textarea id="playerGenders" rows="3" placeholder="男\n女\n男\n女\n男\n女\n女\n男\n男\n男\n男\n男\n女\n女\n女\n女\n女\n女\n女"></textarea>
         </div>
         <div class="flex-child input-group">
-          <label>参加ROUND（1行につき1名）：</label>
+          <label>参加轮次（每行一个）：</label>
           <textarea id="playerJoinRounds" rows="3" placeholder="1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1"></textarea>
         </div>
       </div>
 
       <div class="rest-controls">
-        <h3>休憩設定</h3>
+        <h3>休息设置</h3>
         <div id="restContainer">
-          <!-- 休憩設定項目がここに追加されます -->
+          <!-- 休息设置项将在这里添加 -->
         </div>
-        <button id="addRestBtn" onclick="addRestControl()">＋ 休憩設定を追加</button>
+        <button id="addRestBtn" onclick="addRestControl()">＋ 添加休息设置</button>
       </div>
       
       <div class="fixed-pair-controls">
-        <h3>固定ペア設定</h3>
+        <h3>固定配对设置</h3>
         <div id="fixedPairContainer">
-          <!-- 固定ペア設定項目がここに追加されます -->
+          <!-- 固定配对设置项将在这里添加 -->
         </div>
-        <button id="addFixedPairBtn" onclick="addFixedPairControl()">＋ 固定ペアを追加</button>
+        <button id="addFixedPairBtn" onclick="addFixedPairControl()">＋ 添加固定配对</button>
       </div>
       
       <div class="join-round-controls">
-        <h3>参加ROUND設定</h3>
+        <h3>参加轮次设置</h3>
         <div id="joinRoundContainer">
-          <!-- 参加ROUND設定項目がここに追加されます -->
+          <!-- 参加轮次设置项将在这里添加 -->
         </div>
-        <button id="addJoinRoundBtn" onclick="addJoinRoundControl()">＋ 参加ROUNDを追加</button>
+        <button id="addJoinRoundBtn" onclick="addJoinRoundControl()">＋ 添加参加轮次</button>
       </div>
 
       <div class="generation-buttons">
-        <button id="generateAny" onclick="generateRounds('any')">なんでも生成</button>
-        <button id="generateMix" onclick="generateRounds('mix')">ミックスダブルス生成</button>
-        <button id="generateMen" onclick="generateRounds('men')">男子ダブルス生成</button>
-        <button id="generateWomen" onclick="generateRounds('women')">女子ダブルス生成</button>
+        <button id="generateAny" onclick="generateRounds('any')">随机生成</button>
+        <button id="generateMix" onclick="generateRounds('mix')">混双生成</button>
+        <button id="generateMen" onclick="generateRounds('men')">男双生成</button>
+        <button id="generateWomen" onclick="generateRounds('women')">女双生成</button>
       </div>
 
-      <button onclick="showCourtDynamicsPopup()">👥 コート動態を表示</button>
-      <button onclick="exportToExcel()" style="background-color: #2196F3;">📊 Excelにエクスポート</button>
-      <button onclick="generateShareLink()">🔗 シェアリンクを生成</button>
-      <button onclick="copyShareLink()">📋 リンクをコピー</button>
+      <button onclick="showCourtDynamicsPopup()">👥 显示场地动态</button>
+      <button onclick="exportToExcel()" style="background-color: #2196F3;">📊 导出到Excel</button>
+      <button onclick="generateShareLink()">🔗 生成分享链接</button>
+      <button onclick="copyShareLink()">📋 复制链接</button>
       <input type="text" id="shareLink" readonly />
 
-      <!-- 新しいウィンドウで開くボタン -->
-      <button class="new-window-btn" onclick="openInNewWindow('any')">🖥️ なんでも生成 (新規ウィンドウ)</button>
-      <button class="new-window-btn" onclick="openInNewWindow('mix')">🖥️ ミックスダブルス (新規ウィンドウ)</button>
-      <button class="new-window-btn" onclick="openInNewWindow('men')">🖥️ 男子ダブルス (新規ウィンドウ)</button>
-      <button class="new-window-btn" onclick="openInNewWindow('women')">🖥️ 女子ダブルス (新規ウィンドウ)</button>
+      <!-- 在新窗口打开按钮 -->
+      <button class="new-window-btn" onclick="openInNewWindow('any')">🖥️ 随机生成 (新窗口)</button>
+      <button class="new-window-btn" onclick="openInNewWindow('mix')">🖥️ 混双 (新窗口)</button>
+      <button class="new-window-btn" onclick="openInNewWindow('men')">🖥️ 男双 (新窗口)</button>
+      <button class="new-window-btn" onclick="openInNewWindow('women')">🖥️ 女双 (新窗口)</button>
     </div>
 
     <div class="result" id="output"></div>
   </div>
 
-  <!-- ポップアップウィンドウ -->
+  <!-- 弹出窗口 -->
   <div class="popup-overlay" id="courtDynamicsPopup">
     <div class="popup-content">
       <div class="popup-header">
-        <div class="popup-title">コート動態表示</div>
+        <div class="popup-title">场地动态显示</div>
         <button class="close-popup" onclick="closeCourtDynamicsPopup()">×</button>
       </div>
       <div id="dynamicsOutput"></div>
@@ -747,11 +1009,11 @@
   </div>
 
   <div style="margin: 20px 0;">
-    <button onclick="saveData()" style="background-color: #ff9800;">💾 データを保存</button>
-    <button onclick="loadData()" style="background-color: #ff9800;">📂 データを読み込み</button>
-    <button onclick="exportData()" style="background-color: #ff5722;">📤 エクスポート</button>
+    <button onclick="saveData()" style="background-color: #ff9800;">💾 保存数据</button>
+    <button onclick="loadData()" style="background-color: #ff9800;">📂 加载数据</button>
+    <button onclick="exportData()" style="background-color: #ff5722;">📤 导出</button>
     <input type="file" id="importFile" accept=".json" onchange="importData(event)" style="display: none;">
-    <button onclick="document.getElementById('importFile').click()" style="background-color: #ff5722;">📥 インポート</button>
+    <button onclick="document.getElementById('importFile').click()" style="background-color: #ff5722;">📥 导入</button>
   </div>
 
   <script>
@@ -759,30 +1021,33 @@
     let allPreviousPairs = [];
     let pairingCounts = {};
     let restSettings = [];
-    let fixedPairs = []; // 固定ペア設定を保持する配列
-    let joinRoundSettings = []; // 参加ROUND設定を保持する配列
+    let fixedPairs = []; // 存储固定配对设置的数组
+    let joinRoundSettings = []; // 存储参加轮次设置的数组
     let allRoundData = [];
     let courtRoundSettings = {};
     let registeredPlayers = [];
     let currentPairingType = 'any';
-    let pairingHistory = {}; // 各ペアの組み合わせ履歴を記録
+    let pairingHistory = {}; // 记录各配对组合的历史
     let playerLevelSumMap = {};
     let allPossiblePairs = [];
     let currentShareData = null;
-    let lastPairingForPlayer = {}; // プレイヤーの最後のペアを記録
+    let lastPairingForPlayer = {}; // 记录球员的最后配对
+    let teams = []; // 存储团队数据的数组
+    let currentTeamMembers = []; // 当前编辑中的团队成员
+    let selectedMembers = []; // 选中的成员
 
-    // レベルスライダーの値を表示する関数
+    // 更新水平滑块显示值的函数
     function updateLevelDisplay() {
       const levelValue = document.getElementById('newPlayerLevel').value;
       document.getElementById('levelDisplay').textContent = levelValue;
     }
 
-    // イベントリスナーを設定する関数
+    // 设置事件监听器的函数
     function initializeLevelSlider() {
       const levelSlider = document.getElementById('newPlayerLevel');
       if (levelSlider) {
         levelSlider.addEventListener('input', updateLevelDisplay);
-        // 初期値を表示
+        // 显示初始值
         updateLevelDisplay();
       }
     }
@@ -798,6 +1063,367 @@
       event.currentTarget.classList.add('active');
     }
 
+    // 团队相关函数
+    function addMemberToTeam() {
+      const name = document.getElementById('memberName').value.trim();
+      const gender = document.getElementById('memberGender').value;
+      const level = parseInt(document.getElementById('memberLevel').value);
+
+      if (!name) {
+        alert('请输入成员姓名');
+        return;
+      }
+
+      if (isNaN(level) || level < 1 || level > 5) {
+        alert('请输入正确的水平 (1-5)');
+        return;
+      }
+
+      // 检查是否已有同名成员
+      if (currentTeamMembers.some(member => member.name === name)) {
+        alert('已存在同名成员');
+        return;
+      }
+
+      currentTeamMembers.push({ name, gender, level });
+      updateTeamMembersList();
+
+      // 清空输入字段
+      document.getElementById('memberName').value = '';
+      document.getElementById('memberLevel').value = '3';
+    }
+
+    function updateTeamMembersList() {
+      const container = document.getElementById('teamMembersList');
+      container.innerHTML = '';
+
+      if (currentTeamMembers.length === 0) {
+        container.innerHTML = '<p>尚未添加成员</p>';
+        return;
+      }
+
+      const list = document.createElement('ul');
+      list.style.listStyleType = 'none';
+      list.style.padding = '0';
+
+      currentTeamMembers.forEach((member, index) => {
+        const item = document.createElement('li');
+        item.style.display = 'flex';
+        item.style.justifyContent = 'space-between';
+        item.style.alignItems = 'center';
+        item.style.padding = '8px 0';
+        item.style.borderBottom = '1px solid #eee';
+
+        const memberInfo = document.createElement('div');
+        memberInfo.innerHTML = `
+          <span style="font-weight: bold;">${member.name}</span>
+          <span style="color: #666; margin-left: 10px;">水平: ${member.level}</span>
+          <span style="color: #666; margin-left: 10px;">${member.gender === 'male' ? '男' : '女'}</span>
+        `;
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = '删除';
+        deleteBtn.style.backgroundColor = '#dc3545';
+        deleteBtn.style.color = 'white';
+        deleteBtn.style.border = 'none';
+        deleteBtn.style.padding = '5px 10px';
+        deleteBtn.style.borderRadius = '5px';
+        deleteBtn.style.cursor = 'pointer';
+        deleteBtn.onclick = () => {
+          currentTeamMembers.splice(index, 1);
+          updateTeamMembersList();
+        };
+
+        item.appendChild(memberInfo);
+        item.appendChild(deleteBtn);
+        list.appendChild(item);
+      });
+
+      container.appendChild(list);
+    }
+
+    function saveTeam() {
+      const teamName = document.getElementById('teamName').value.trim();
+
+      if (!teamName) {
+        alert('请输入团队名称');
+        return;
+      }
+
+      if (currentTeamMembers.length === 0) {
+        alert('请添加成员');
+        return;
+      }
+
+      // 更新现有团队或添加新团队
+      const existingTeamIndex = teams.findIndex(team => team.name === teamName);
+      
+      if (existingTeamIndex >= 0) {
+        // 更新现有团队
+        teams[existingTeamIndex].members = [...currentTeamMembers];
+      } else {
+        // 添加新团队
+        teams.push({
+          name: teamName,
+          members: [...currentTeamMembers]
+        });
+      }
+
+      // 更新团队列表
+      updateTeamList();
+      
+      // 更新团队选择器
+      updateTeamSelector();
+      
+      // 重置表单
+      document.getElementById('teamName').value = '';
+      currentTeamMembers = [];
+      updateTeamMembersList();
+      
+      alert('团队已保存');
+    }
+
+    function updateTeamList() {
+      const container = document.getElementById('teamList');
+      container.innerHTML = '';
+
+      if (teams.length === 0) {
+        container.innerHTML = '<p>没有注册的团队</p>';
+        return;
+      }
+
+      teams.forEach((team, teamIndex) => {
+        const teamItem = document.createElement('div');
+        teamItem.className = 'team-item';
+        
+        const teamHeader = document.createElement('div');
+        teamHeader.className = 'team-header';
+        
+        const teamName = document.createElement('div');
+        teamName.className = 'team-name';
+        teamName.textContent = team.name;
+        
+        const teamActions = document.createElement('div');
+        teamActions.className = 'team-actions';
+        
+        const editBtn = document.createElement('button');
+        editBtn.textContent = '编辑';
+        editBtn.style.backgroundColor = '#2196F3';
+        editBtn.onclick = () => editTeam(teamIndex);
+        
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = '删除';
+        deleteBtn.style.backgroundColor = '#dc3545';
+        deleteBtn.onclick = () => deleteTeam(teamIndex);
+        
+        teamActions.appendChild(editBtn);
+        teamActions.appendChild(deleteBtn);
+        teamHeader.appendChild(teamName);
+        teamHeader.appendChild(teamActions);
+        
+        const membersList = document.createElement('div');
+        membersList.className = 'team-members';
+        
+        team.members.forEach(member => {
+          const memberItem = document.createElement('div');
+          memberItem.className = 'member-item';
+          
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.className = 'member-checkbox';
+          checkbox.value = member.name;
+          checkbox.onchange = (e) => toggleMemberSelection(member, e.target.checked);
+          
+          const memberDetails = document.createElement('div');
+          memberDetails.className = 'member-details';
+          
+          const nameSpan = document.createElement('span');
+          nameSpan.className = 'member-name';
+          nameSpan.textContent = member.name;
+          
+          const levelSpan = document.createElement('span');
+          levelSpan.className = 'member-level';
+          levelSpan.textContent = `水平: ${member.level}`;
+          
+          const genderSpan = document.createElement('span');
+          genderSpan.className = 'member-gender';
+          genderSpan.textContent = member.gender === 'male' ? '男' : '女';
+          
+          memberDetails.appendChild(nameSpan);
+          memberDetails.appendChild(levelSpan);
+          memberDetails.appendChild(genderSpan);
+          
+          memberItem.appendChild(checkbox);
+          memberItem.appendChild(memberDetails);
+          membersList.appendChild(memberItem);
+        });
+        
+        teamItem.appendChild(teamHeader);
+        teamItem.appendChild(membersList);
+        container.appendChild(teamItem);
+      });
+    }
+
+    function updateTeamSelector() {
+      const selector = document.getElementById('teamSelector');
+      selector.innerHTML = '<option value="">请选择团队</option>';
+      
+      teams.forEach(team => {
+        const option = document.createElement('option');
+        option.value = team.name;
+        option.textContent = team.name;
+        selector.appendChild(option);
+      });
+    }
+
+    function loadTeamMembers() {
+      const teamName = document.getElementById('teamSelector').value;
+      if (!teamName) return;
+      
+      const team = teams.find(t => t.name === teamName);
+      if (!team) return;
+      
+      // 更新已选成员列表
+      const selectedList = document.getElementById('selectedMembersList');
+      selectedList.innerHTML = '';
+      
+      team.members.forEach(member => {
+        const item = document.createElement('li');
+        
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = selectedMembers.some(m => m.name === member.name);
+        checkbox.onchange = (e) => toggleMemberSelection(member, e.target.checked);
+        
+        const memberInfo = document.createElement('span');
+        memberInfo.textContent = `${member.name} (水平: ${member.level}, ${member.gender === 'male' ? '男' : '女'})`;
+        
+        item.appendChild(checkbox);
+        item.appendChild(memberInfo);
+        selectedList.appendChild(item);
+      });
+    }
+
+    function toggleMemberSelection(member, isSelected) {
+      if (isSelected) {
+        // 检查是否已选择
+        if (!selectedMembers.some(m => m.name === member.name)) {
+          selectedMembers.push(member);
+        }
+      } else {
+        // 从选择中移除
+        selectedMembers = selectedMembers.filter(m => m.name !== member.name);
+      }
+      
+      updateSelectedMembersList();
+    }
+
+    function updateSelectedMembersList() {
+      const container = document.getElementById('selectedMembersList');
+      container.innerHTML = '';
+      
+      selectedMembers.forEach(member => {
+        const item = document.createElement('li');
+        item.textContent = `${member.name} (水平: ${member.level}, ${member.gender === 'male' ? '男' : '女'})`;
+        container.appendChild(item);
+      });
+    }
+
+    // 全选成员函数
+    function selectAllMembers() {
+      const teamName = document.getElementById('teamSelector').value;
+      if (!teamName) {
+        alert('请选择团队');
+        return;
+      }
+      
+      const team = teams.find(t => t.name === teamName);
+      if (!team) return;
+      
+      // 选择所有成员
+      selectedMembers = [...team.members];
+      
+      // 更新复选框
+      const checkboxes = document.querySelectorAll('.member-checkbox');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = true;
+      });
+      
+      updateSelectedMembersList();
+      alert('已全选所有成员');
+    }
+
+    // 清除选择函数
+    function clearSelectedMembers() {
+      selectedMembers = [];
+      
+      // 更新复选框
+      const checkboxes = document.querySelectorAll('.member-checkbox');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+      });
+      
+      updateSelectedMembersList();
+      alert('已清除选择');
+    }
+
+    // 清除所有注册球员函数
+    function clearRegisteredPlayers() {
+      if (confirm('确定要删除所有已注册球员吗？此操作不可撤销。')) {
+        registeredPlayers = [];
+        updateRegisteredPlayersList();
+        updateTeamDivisionPlayers();
+        alert('已清除所有注册球员');
+      }
+    }
+
+    function addSelectedMembersToEvent() {
+      if (selectedMembers.length === 0) {
+        alert('请选择成员');
+        return;
+      }
+      
+      // 切换到活动注册标签页
+      openTab({ currentTarget: document.querySelector('.tab-container button:nth-child(2)') }, 'eventTab');
+      
+      // 将选中成员添加到已注册球员
+      selectedMembers.forEach(member => {
+        // 检查是否已注册
+        if (!registeredPlayers.some(p => p.name === member.name)) {
+          registeredPlayers.push({
+            name: member.name,
+            level: member.level,
+            gender: member.gender,
+            joinRound: 1
+          });
+        }
+      });
+      
+      updateRegisteredPlayersList();
+      alert('已将选中成员添加到活动');
+    }
+
+    function editTeam(teamIndex) {
+      const team = teams[teamIndex];
+      
+      // 在表单中设置团队信息
+      document.getElementById('teamName').value = team.name;
+      currentTeamMembers = [...team.members];
+      
+      updateTeamMembersList();
+      
+      // 切换到团队注册标签页
+      openTab({ currentTarget: document.querySelector('.tab-container button:nth-child(1)') }, 'teamRegistrationTab');
+    }
+
+    function deleteTeam(teamIndex) {
+      if (confirm('确定要删除此团队吗？')) {
+        teams.splice(teamIndex, 1);
+        updateTeamList();
+        updateTeamSelector();
+      }
+    }
+
     function addPlayer() {
       const name = document.getElementById('newPlayerName').value.trim();
       const level = parseInt(document.getElementById('newPlayerLevel').value);
@@ -805,17 +1431,17 @@
       const joinRound = parseInt(document.getElementById('newPlayerJoinRound').value) || 1;
 
       if (!name) {
-        alert('プレイヤー名を入力してください');
+        alert('请输入球员姓名');
         return;
       }
 
       if (isNaN(level) || level < 1 || level > 5) {
-        alert('レベルを正しく入力してください (1-5)');
+        alert('请输入正确的水平 (1-5)');
         return;
       }
 
       if (registeredPlayers.some(player => player.name === name)) {
-        alert('この名前は既に登録されています');
+        alert('此姓名已注册');
         return;
       }
 
@@ -845,9 +1471,9 @@
         row.innerHTML = `
           <td>${player.name}</td>
           <td>${player.level}</td>
-          <td>${player.gender === 'male' ? '男性' : '女性'}</td>
+          <td>${player.gender === 'male' ? '男' : '女'}</td>
           <td>${player.joinRound}</td>
-          <td><button onclick="removePlayer(${index})" style="background-color: #dc3545;">削除</button></td>
+          <td><button onclick="removePlayer(${index})" style="background-color: #dc3545;">删除</button></td>
         `;
         tbody.appendChild(row);
 
@@ -858,7 +1484,7 @@
       const countInfo = document.createElement('div');
       countInfo.className = 'player-count-info';
       countInfo.innerHTML = `
-        登録プレイヤー: 男性 ${maleCount}人, 女性 ${femaleCount}人, 合計 ${registeredPlayers.length}人
+        已注册球员: 男 ${maleCount}人, 女 ${femaleCount}人, 总计 ${registeredPlayers.length}人
       `;
       tbody.parentNode.insertBefore(countInfo, tbody);
 
@@ -881,13 +1507,13 @@
       gendersTextarea.value = genders;
       joinRoundsTextarea.value = joinRounds;
       
-      // プレイヤー選択リストを更新
+      // 更新球员选择列表
       updatePlayerSelects();
     }
 
     function goToTeamDivision() {
       if (registeredPlayers.length === 0) {
-        alert('プレイヤーを登録してください');
+        alert('请先注册球员');
         return;
       }
 
@@ -899,7 +1525,7 @@
       document.querySelectorAll('.tab').forEach(tab => {
         tab.classList.remove('active');
       });
-      document.querySelector('.tab-container button:nth-child(2)').classList.add('active');
+      document.querySelector('.tab-container button:nth-child(3)').classList.add('active');
 
       updateTeamDivisionPlayers();
     }
@@ -922,7 +1548,7 @@
         for (let j = i + 1; j < players.length; j++) {
           const pair = [players[i].name, players[j].name].sort().join(' & ');
           pairingCounts[pair] = 0;
-          pairingHistory[pair] = []; // 各ペアの組み合わせ履歴を初期化
+          pairingHistory[pair] = []; // 初始化各配对组合的历史
           playerLevelSumMap[pair] = players[i].level + players[j].level;
           allPossiblePairs.push(pair);
         }
@@ -941,21 +1567,21 @@
     }
 
     function createPairs(players, allPlayers, pairingType, roundNumber) {
-      // 参加ROUNDを考慮してプレイヤーをフィルタリング
+      // 根据参加轮次筛选球员
       const availablePlayers = players.filter(player => {
         const playerInfo = allPlayers.find(p => p.name === player[0]);
         return playerInfo && playerInfo.joinRound <= roundNumber;
       });
 
-      // このラウンドの固定ペアを取得
+      // 获取当前轮次的固定配对
       const roundFixedPairs = fixedPairs.filter(fp => fp.round === roundNumber);
       
-      // 固定ペアがある場合、それらを優先的に処理
+      // 如果有固定配对，优先处理
       if (roundFixedPairs.length > 0) {
         const fixedPairPlayers = [];
         const fixedPairData = [];
         
-        // 固定ペアのプレイヤーを収集
+        // 收集固定配对的球员
         roundFixedPairs.forEach(fp => {
           const player1 = availablePlayers.find(p => p[0] === fp.player1);
           const player2 = availablePlayers.find(p => p[0] === fp.player2);
@@ -966,15 +1592,15 @@
           }
         });
         
-        // 固定ペア以外のプレイヤー
+        // 固定配对以外的球员
         const remainingPlayers = availablePlayers.filter(p => !fixedPairPlayers.includes(p[0]));
         
-        // 固定ペアと残りのプレイヤーからペアを生成
+        // 从固定配对和剩余球员中生成配对
         if (fixedPairData.length > 0 && remainingPlayers.length >= 2) {
-          // 固定ペアの1つ
+          // 固定配对中的一个
           const fixedPair = fixedPairData[0];
           
-          // 残りのプレイヤーからレベル差を考慮して2人を選ぶ
+          // 从剩余球员中选择考虑水平差的2人
           const opponentPair = selectOpponentsConsideringLevel(fixedPair, remainingPlayers, allPlayers, pairingType);
           
           if (opponentPair.length === 2) {
@@ -984,7 +1610,7 @@
             pairingCounts[pair1Key] = (pairingCounts[pair1Key] || 0) + 1;
             pairingCounts[pair2Key] = (pairingCounts[pair2Key] || 0) + 1;
             
-            // ペアの組み合わせ履歴を更新
+            // 更新配对组合历史
             pairingHistory[pair1Key].push({
               round: roundNumber,
               opponent: pair2Key,
@@ -1000,7 +1626,7 @@
             fixedPair.forEach(player => playCountMap[player[0]]++);
             opponentPair.forEach(player => playCountMap[player[0]]++);
             
-            // 最後のペアを記録
+            // 记录最后配对
             lastPairingForPlayer[fixedPair[0][0]] = fixedPair[1][0];
             lastPairingForPlayer[fixedPair[1][0]] = fixedPair[0][0];
             lastPairingForPlayer[opponentPair[0][0]] = opponentPair[1][0];
@@ -1010,8 +1636,8 @@
             const pair2Type = getPairingType([opponentPair[0][0], opponentPair[1][0]], allPlayers);
             const levelDiff = (fixedPair[0][1] + fixedPair[1][1]) - (opponentPair[0][1] + opponentPair[1][1]);
             const pairingTypeText = pair1Type === pair2Type ?
-              (pair1Type === 'men' ? '男子ダブルス' :
-               pair1Type === 'women' ? '女子ダブルス' : 'ミックスダブルス') : '混合';
+              (pair1Type === 'men' ? '男双' :
+               pair1Type === 'women' ? '女双' : '混双') : '混合';
             
             return [
               fixedPair,
@@ -1024,44 +1650,44 @@
         }
       }
 
-      // 前回のペアを維持するロジックを完全に削除
+      // 完全移除上次配对的保持逻辑
 
-      // 固定ペアがない場合の通常のペア生成ロジック
-      // レベル差が大きい場合にペアを調整する
+      // 没有固定配对时的常规配对生成逻辑
+      // 当水平差较大时调整配对
       return generateBalancedPairs(availablePlayers, allPlayers, pairingType);
     }
 
-    // バランスの取れたペアを生成する関数（レベル差考慮）
+    // 生成平衡配对的函数（考虑水平差）
     function generateBalancedPairs(players, allPlayers, pairingType) {
-      // 重み係数設定
+      // 权重系数设置
       const WEIGHTS = {
-        levelDiff: 0.01,    // レベル差の重み
-        unpairing: 999999,   // 未対戦ペアの重み (大幅に増加)
-        playCount: 0.000001,    // 出場回数の重み
-        pairingHistory: 999999999999999 // 既に対戦したペアとの重複を避ける重み
+        levelDiff: 0.01,    // 水平差的权重
+        unpairing: 999999,   // 未对战配对的权重 (大幅增加)
+        playCount: 0.000001,    // 出场次数的权重
+        pairingHistory: 999999999999999 // 避免与已对战过的配对重复的权重
       };
       
-      // スコア計算関数
+      // 分数计算函数
       const calculateScore = (pair1, pair2) => {
         const pair1Level = pair1[0][1] + pair1[1][1];
         const pair2Level = pair2[0][1] + pair2[1][1];
         const levelDiff = Math.abs(pair1Level - pair2Level);
         
-        // 未対戦ペアのスコア
+        // 未对战配对的分数
         const pair1Key = [pair1[0][0], pair1[1][0]].sort().join(' & ');
         const pair2Key = [pair2[0][0], pair2[1][0]].sort().join(' & ');
         
-        // 未対戦ペアの場合は大幅にスコアを下げる
+        // 如果是未对战配对，则大幅降低分数
         const unpairScore1 = (pairingCounts[pair1Key] || 0) === 0 ? WEIGHTS.unpairing : 0;
         const unpairScore2 = (pairingCounts[pair2Key] || 0) === 0 ? WEIGHTS.unpairing : 0;
         const unpairScore = unpairScore1 + unpairScore2;
         
-        // 出場回数スコア（少ない方が優先）
+        // 出场次数分数（出场少的优先）
         const playCountScore = 
           (Math.max(playCountMap[pair1[0][0]], playCountMap[pair1[1][0]]) +
            Math.max(playCountMap[pair2[0][0]], playCountMap[pair2[1][0]])) * WEIGHTS.playCount;
         
-        // 既に対戦したペアとの重複を避けるスコア
+        // 避免与已对战过的配对重复的分数
         let historyScore = 0;
         if (pairingHistory[pair1Key] && pairingHistory[pair1Key].some(h => h.opponent === pair2Key)) {
           historyScore += WEIGHTS.pairingHistory;
@@ -1070,11 +1696,11 @@
           historyScore += WEIGHTS.pairingHistory;
         }
         
-        // 総合スコア（小さい方が良い）
+        // 综合分数（越小越好）
         return levelDiff * WEIGHTS.levelDiff - unpairScore + playCountScore + historyScore;
       };
 
-      // 可能な全てのペアの組み合わせを生成
+      // 生成所有可能的配对组合
       const allPossiblePairs = [];
       for (let i = 0; i < players.length; i++) {
         for (let j = i + 1; j < players.length; j++) {
@@ -1082,14 +1708,14 @@
         }
       }
 
-      // ペアタイプに合致するペアのみフィルタリング
+      // 筛选符合配对类型的配对
       const filteredPairs = allPossiblePairs.filter(pair => {
         const player1 = allPlayers.find(p => p.name === pair[0][0]);
         const player2 = allPlayers.find(p => p.name === pair[1][0]);
         
         if (!player1 || !player2) return false;
         
-        // ペアタイプチェック
+        // 配对类型检查
         if (pairingType === 'men') {
           return player1.gender === 'male' && player2.gender === 'male';
         } else if (pairingType === 'women') {
@@ -1098,10 +1724,10 @@
           return (player1.gender === 'male' && player2.gender === 'female') || 
                  (player1.gender === 'female' && player2.gender === 'male');
         }
-        return true; // 'any'の場合は全て許可
+        return true; // 'any'时允许所有类型
       });
 
-      // 最適なペアの組み合わせを探す
+      // 寻找最优的配对组合
       let bestScore = Infinity;
       let bestPair1 = null;
       let bestPair2 = null;
@@ -1111,7 +1737,7 @@
           const pair1 = filteredPairs[i];
           const pair2 = filteredPairs[j];
           
-          // 同じプレイヤーが重複していないかチェック
+          // 检查是否有重复球员
           if (pair1[0][0] === pair2[0][0] || pair1[0][0] === pair2[1][0] ||
               pair1[1][0] === pair2[0][0] || pair1[1][0] === pair2[1][0]) {
             continue;
@@ -1119,18 +1745,18 @@
           
           const currentScore = calculateScore(pair1, pair2);
           
-          // レベル差が3以上の場合はペアを調整
+          // 如果水平差大于等于3，则尝试重新分配
           const pair1Level = pair1[0][1] + pair1[1][1];
           const pair2Level = pair2[0][1] + pair2[1][1];
           const levelDiff = Math.abs(pair1Level - pair2Level);
           
           if (levelDiff >= 3) {
-            // レベル差が大きい場合、再配置を試みる
+            // 水平差过大时，尝试重新分配
             const reassigned = reassignForBalance([...pair1, ...pair2], allPlayers, pairingType);
             if (reassigned) {
               const reassignedScore = calculateScore([reassigned[0], reassigned[1]], [reassigned[2], reassigned[3]]);
               if (reassignedScore < currentScore) {
-                // ペアの組み合わせ履歴を更新
+                // 更新配对组合历史
                 const pair1Key = [reassigned[0][0], reassigned[1][0]].sort().join(' & ');
                 const pair2Key = [reassigned[2][0], reassigned[3][0]].sort().join(' & ');
                 
@@ -1170,7 +1796,7 @@
         const pair2Type = getPairingType([bestPair2[0][0], bestPair2[1][0]], allPlayers);
         const levelDiff = (bestPair1[0][1] + bestPair1[1][1]) - (bestPair2[0][1] + bestPair2[1][1]);
         
-        // ペアの組み合わせ履歴を更新
+        // 更新配对组合历史
         const pair1Key = [bestPair1[0][0], bestPair1[1][0]].sort().join(' & ');
         const pair2Key = [bestPair2[0][0], bestPair2[1][0]].sort().join(' & ');
         
@@ -1186,7 +1812,7 @@
           type: pair2Type
         });
         
-        // 最後のペアを記録
+        // 记录最后配对
         lastPairingForPlayer[bestPair1[0][0]] = bestPair1[1][0];
         lastPairingForPlayer[bestPair1[1][0]] = bestPair1[0][0];
         lastPairingForPlayer[bestPair2[0][0]] = bestPair2[1][0];
@@ -1204,11 +1830,11 @@
       return [[], [], 0, '', ''];
     }
 
-    // レベル差が大きい場合にペアを再配置する関数
+    // 水平差过大时重新分配配对的函数
     function reassignForBalance(players, allPlayers, pairingType) {
       if (players.length !== 4) return null;
       
-      // 全ての可能な組み合わせを試す
+      // 尝试所有可能的组合
       const combinations = [
         [0, 1, 2, 3], [0, 2, 1, 3], [0, 3, 1, 2]
       ];
@@ -1220,7 +1846,7 @@
         const pair1 = [players[combo[0]], players[combo[1]]];
         const pair2 = [players[combo[2]], players[combo[3]]];
         
-        // ペアタイプチェック
+        // 配对类型检查
         const pair1Type = getPairingType([pair1[0][0], pair1[1][0]], allPlayers);
         const pair2Type = getPairingType([pair2[0][0], pair2[1][0]], allPlayers);
         
@@ -1249,11 +1875,11 @@
       return minLevelDiff < Infinity ? bestCombination : null;
     }
 
-    // レベル差を考慮して対戦相手を選ぶ関数（固定ペア用）
+    // 考虑水平差选择对手配对的函数（用于固定配对）
     function selectOpponentsConsideringLevel(fixedPair, remainingPlayers, allPlayers, pairingType) {
       const fixedPairLevel = fixedPair[0][1] + fixedPair[1][1];
       
-      // 可能な全てのペアを生成
+      // 生成所有可能的对手配对
       const possibleOpponentPairs = [];
       for (let i = 0; i < remainingPlayers.length; i++) {
         for (let j = i + 1; j < remainingPlayers.length; j++) {
@@ -1261,14 +1887,14 @@
         }
       }
       
-      // ペアタイプに合致するペアのみフィルタリング
+      // 筛选符合配对类型的配对
       const filteredPairs = possibleOpponentPairs.filter(pair => {
         const player1 = allPlayers.find(p => p.name === pair[0][0]);
         const player2 = allPlayers.find(p => p.name === pair[1][0]);
         
         if (!player1 || !player2) return false;
         
-        // ペアタイプチェック
+        // 配对类型检查
         if (pairingType === 'men') {
           return player1.gender === 'male' && player2.gender === 'male';
         } else if (pairingType === 'women') {
@@ -1277,14 +1903,14 @@
           return (player1.gender === 'male' && player2.gender === 'female') || 
                  (player1.gender === 'female' && player2.gender === 'male');
         }
-        return true; // 'any'の場合は全て許可
+        return true; // 'any'时允许所有类型
       });
       
       if (filteredPairs.length === 0) {
-        return remainingPlayers.slice(0, 2); // 条件に合うペアがない場合はランダムに選択
+        return remainingPlayers.slice(0, 2); // 没有符合条件的配对时随机选择
       }
       
-      // レベル差が最小になるペアを選択
+      // 选择水平差最小的配对
       let bestPair = filteredPairs[0];
       let minLevelDiff = Math.abs(fixedPairLevel - (bestPair[0][1] + bestPair[1][1]));
       
@@ -1303,33 +1929,33 @@
       const pair1TypeClass = pair1Type === 'men' ? 'men' : pair1Type === 'women' ? 'women' : 'mix';
       const pair2TypeClass = pair2Type === 'men' ? 'men' : pair2Type === 'women' ? 'women' : 'mix';
 
-      const diffWarning = Math.abs(diff) > 3 ? `<span class="level-diff-warning"> (差が大きい!)</span>` : '';
+      const diffWarning = Math.abs(diff) > 3 ? `<span class="level-diff-warning"> (差距过大!)</span>` : '';
       const fixedPairClass = isFixedPair ? 'fixed-pair-highlight' : '';
 
       return `<tr class="${fixedPairClass}">
-        <td>コート ${courtNumber}</td>
-        <td><span class="bold-text">${a[0][0]} & ${a[1][0]} <span class="pairing-type ${pair1TypeClass}">${pair1Type === 'men' ? '男子' : pair1Type === 'women' ? '女子' : 'ミックス'}</span></span></td>
-        <td><span class="bold-text">${b[0][0]} & ${b[1][0]} <span class="pairing-type ${pair2TypeClass}">${pair2Type === 'men' ? '男子' : pair2Type === 'women' ? '女子' : 'ミックス'}</span></span></td>
+        <td>场地 ${courtNumber}</td>
+        <td><span class="bold-text">${a[0][0]} & ${a[1][0]} <span class="pairing-type ${pair1TypeClass}">${pair1Type === 'men' ? '男双' : pair1Type === 'women' ? '女双' : '混双'}</span></span></td>
+        <td><span class="bold-text">${b[0][0]} & ${b[1][0]} <span class="pairing-type ${pair2TypeClass}">${pair2Type === 'men' ? '男双' : pair2Type === 'women' ? '女双' : '混双'}</span></span></td>
         <td><span class="bold-text">${diff}${diffWarning}</span></td>
-        <td>${pairingTypeText}${isFixedPair ? ' (固定ペア)' : ''}</td>
+        <td>${pairingTypeText}${isFixedPair ? ' (固定配对)' : ''}</td>
       </tr>`;
     }
 
     function createStatistics(playCountMap, pairingCounts, allPlayers, currentPairingType) {
-      let html = "<h3>🏅 総出場統計</h3><table><tr><th>プレイヤー</th><th>出場回数</th></tr>";
+      let html = "<h3>🏅 总出场统计</h3><table><tr><th>球员</th><th>出场次数</th></tr>";
       Object.entries(playCountMap).forEach(([name, count]) => {
         html += `<tr><td>${name}</td><td>${count}</td></tr>`;
       });
       html += "</table>";
 
-      html += `<div class="pairing-stats"><h3>🤝 ペアリング統計 (${getPairingTypeName(currentPairingType)})</h3>`;
-      html += "<table><tr><th>ペア</th><th>タイプ</th><th>組み合わせ回数</th><th>レベル合計</th><th>対戦履歴</th></tr>";
+      html += `<div class="pairing-stats"><h3>🤝 配对统计 (${getPairingTypeName(currentPairingType)})</h3>`;
+      html += "<table><tr><th>配对</th><th>类型</th><th>组合次数</th><th>水平总和</th><th>对战历史</th></tr>";
 
       const sortedPairs = allPossiblePairs.sort((a, b) => {
-        // 未対戦ペアを先に表示
+        // 未对战配对优先显示
         if (pairingCounts[a] === 0 && pairingCounts[b] > 0) return -1;
         if (pairingCounts[a] > 0 && pairingCounts[b] === 0) return 1;
-        // その後は対戦回数が少ない順
+        // 然后按对战次数从少到多排序
         return (pairingCounts[a] || 0) - (pairingCounts[b] || 0);
       });
 
@@ -1341,37 +1967,37 @@
 
         if (player1Data && player2Data) {
           if (player1Data.gender === 'male' && player2Data.gender === 'male') {
-            pairType = '男子';
+            pairType = '男双';
           } else if (player1Data.gender === 'female' && player2Data.gender === 'female') {
-            pairType = '女子';
+            pairType = '女双';
           } else {
-            pairType = 'ミックス';
+            pairType = '混双';
           }
         }
 
         const count = pairingCounts[pair] || 0;
         const levelSum = playerLevelSumMap[pair] || (player1Data?.level || 0) + (player2Data?.level || 0);
         
-        // 対戦履歴を表示
+        // 显示对战历史
         const history = pairingHistory[pair] || [];
         const historyText = history.map(h => `R${h.round}: ${h.opponent} (${h.type})`).join('<br>');
 
-        // 未対戦ペアは強調表示
+        // 未对战配对高亮显示
         const highlightClass = count === 0 ? 'unpaired-highlight' : '';
 
         html += `<tr class="${highlightClass}">
           <td>${pair}</td>
           <td>${pairType}</td>
-          <td>${count}回</td>
+          <td>${count}次</td>
           <td>${levelSum}</td>
           <td>${historyText || '-'}</td>
         </tr>`;
       });
 
-      // 未対戦ペアの数を表示
+      // 显示未对战配对数量
       const unpairedCount = sortedPairs.filter(pair => (pairingCounts[pair] || 0) === 0).length;
       html += `<tr><td colspan="5" style="text-align: center; font-weight: bold; background-color: ${unpairedCount > 0 ? '#fff8e1' : '#e8f5e9'}">
-        未対戦ペア: ${unpairedCount}組 / 全${sortedPairs.length}組
+        未对战配对: ${unpairedCount}组 / 共${sortedPairs.length}组
       </td></tr>`;
 
       html += "</table></div>";
@@ -1418,7 +2044,7 @@
 
       let fullHtml = `
         <div class="player-count-info">
-          登録プレイヤー: 男性 ${maleCount}人, 女性 ${femaleCount}人, 合計 ${players.length}人
+          已注册球员: 男 ${maleCount}人, 女 ${femaleCount}人, 总计 ${players.length}人
         </div>
       `;
 
@@ -1431,13 +2057,13 @@
         const restingPlayers = getRestingPlayers(roundNumber);
         availablePlayers = availablePlayers.filter(player => !restingPlayers.includes(player[0]));
 
-        // 参加ROUNDを考慮してフィルタリング
+        // 根据参加轮次筛选
         availablePlayers = availablePlayers.filter(player => {
           const playerInfo = allPlayers.find(p => p.name === player[0]);
           return playerInfo && playerInfo.joinRound <= roundNumber;
         });
 
-        // 出場回数が少ないプレイヤーを優先
+        // 出场次数少的球员优先
         availablePlayers.sort((a, b) => playCountMap[a[0]] - playCountMap[b[0]]);
 
         const malePlayers = availablePlayers.filter(p => {
@@ -1458,14 +2084,14 @@
           selectedPlayers = malePlayers.slice(0, maxPossiblePairs * 2);
 
           if (malePlayers.length < 4) {
-            warningMessage = `<p class="warning-message">⚠️ 男子プレイヤーが不足しています (${malePlayers.length}人)。男子ダブルスを組むには最低4人必要です。</p>`;
+            warningMessage = `<p class="warning-message">⚠️ 男球员不足 (${malePlayers.length}人)。组成男双至少需要4人。</p>`;
           }
         } else if (pairingType === 'women') {
           const maxPossiblePairs = Math.min(Math.floor(femalePlayers.length / 2), courtCount);
           selectedPlayers = femalePlayers.slice(0, maxPossiblePairs * 2);
 
           if (femalePlayers.length < 4) {
-            warningMessage = `<p class="warning-message">⚠️ 女子プレイヤーが不足しています (${femalePlayers.length}人)。女子ダブルスを組むには最低4人必要です。</p>`;
+            warningMessage = `<p class="warning-message">⚠️ 女球员不足 (${femalePlayers.length}人)。组成女双至少需要4人。</p>`;
           }
         } else if (pairingType === 'mix') {
           const maxPossiblePairs = Math.min(Math.min(malePlayers.length, femalePlayers.length), courtCount);
@@ -1477,32 +2103,32 @@
           }
 
           if (malePlayers.length < 2 || femalePlayers.length < 2) {
-            warningMessage = `<p class="warning-message">⚠️ ミックスダブルスを組むには男性と女性が各2人以上必要です (男性: ${malePlayers.length}人, 女性: ${femalePlayers.length}人)。</p>`;
+            warningMessage = `<p class="warning-message">⚠️ 组成混双需要男女各至少2人 (男: ${malePlayers.length}人, 女: ${femalePlayers.length}人)。</p>`;
           }
         } else {
           const maxPossiblePlayers = Math.min(availablePlayers.length, courtCount * 4);
           selectedPlayers = availablePlayers.slice(0, maxPossiblePlayers);
 
           if (availablePlayers.length < 4) {
-            warningMessage = `<p class="warning-message">⚠️ プレイヤーが不足しています (${availablePlayers.length}人)。ダブルスを組むには最低4人必要です。</p>`;
+            warningMessage = `<p class="warning-message">⚠️ 球员不足 (${availablePlayers.length}人)。组成双打至少需要4人。</p>`;
           }
         }
 
-        let html = `<h3>第 ${roundNumber} ラウンド (${getPairingTypeName(pairingType)})</h3>`;
+        let html = `<h3>第 ${roundNumber} 轮 (${getPairingTypeName(pairingType)})</h3>`;
 
         if (warningMessage) {
           html += warningMessage;
         }
 
         if (restingPlayers.length > 0) {
-          html += `<p>休憩中のプレイヤー: ${restingPlayers.join(', ')}</p>`;
+          html += `<p>休息中的球员: ${restingPlayers.join(', ')}</p>`;
         }
 
-        // このラウンドに参加するプレイヤーを表示
+        // 显示本轮参加的球员
         const joiningPlayers = allPlayers.filter(p => p.joinRound <= roundNumber && !restingPlayers.includes(p.name));
-        html += `<p>参加プレイヤー (${joiningPlayers.length}人): ${joiningPlayers.map(p => p.name).join(', ')}</p>`;
+        html += `<p>参加球员 (${joiningPlayers.length}人): ${joiningPlayers.map(p => p.name).join(', ')}</p>`;
 
-        html += "<table><tr><th>コート</th><th>チーム A</th><th>チーム B</th><th>A-B 差</th><th>タイプ</th></tr>";
+        html += "<table><tr><th>场地</th><th>队伍 A</th><th>队伍 B</th><th>A-B 差</th><th>类型</th></tr>";
 
         currentRoundPairs = [];
         const roundData = {
@@ -1514,10 +2140,10 @@
         let courtNumber = 1;
         let remainingPlayersList = [];
         
-        // このラウンドの固定ペアを取得
+        // 获取当前轮次的固定配对
         const roundFixedPairs = fixedPairs.filter(fp => fp.round === roundNumber);
 
-        // 固定ペアがある場合、それらを優先的に割り当て
+        // 如果有固定配对，优先分配
         if (roundFixedPairs.length > 0) {
           for (const fp of roundFixedPairs) {
             if (courtNumber > courtCount) break;
@@ -1526,13 +2152,13 @@
             const player2 = selectedPlayers.find(p => p[0] === fp.player2);
             
             if (player1 && player2 && !assignedPlayers.has(player1[0]) && !assignedPlayers.has(player2[0])) {
-              // 固定ペアの相手チームを選択
+              // 选择固定配对的对手
               const availableOpponents = selectedPlayers.filter(
                 p => !assignedPlayers.has(p[0]) && p[0] !== player1[0] && p[0] !== player2[0]
               );
               
               if (availableOpponents.length >= 2) {
-                // 固定ペアと対戦するペアを生成（レベル差を無視）
+                // 生成与固定配对对战的配对（忽略水平差）
                 shuffle(availableOpponents);
                 const opponentPair = availableOpponents.slice(0, 2);
                 
@@ -1544,7 +2170,7 @@
                   pairingCounts[pair1Key] = (pairingCounts[pair1Key] || 0) + 1;
                   pairingCounts[pair2Key] = (pairingCounts[pair2Key] || 0) + 1;
                   
-                  // ペアの組み合わせ履歴を更新
+                  // 更新配对组合历史
                   pairingHistory[pair1Key].push({
                     round: roundNumber,
                     opponent: pair2Key,
@@ -1566,8 +2192,8 @@
                   const pair2Type = getPairingType([opponentPair[0][0], opponentPair[1][0]], allPlayers);
                   const levelDiff = (player1[1] + player2[1]) - (opponentPair[0][1] + opponentPair[1][1]);
                   const pairingTypeText = pair1Type === pair2Type ?
-                    (pair1Type === 'men' ? '男子ダブルス' :
-                     pair1Type === 'women' ? '女子ダブルス' : 'ミックスダブルス') : '混合';
+                    (pair1Type === 'men' ? '男双' :
+                     pair1Type === 'women' ? '女双' : '混双') : '混合';
 
                   html += createMatchRow(courtNumber, 
                     [[player1[0], player1[1]], [player2[0], player2[1]]], 
@@ -1592,7 +2218,7 @@
           }
         }
 
-        // 残りのコートに通常のペアを割り当て
+        // 为剩余场地分配常规配对
         while (courtNumber <= courtCount) {
           const availableForCourt = selectedPlayers.filter(p => !assignedPlayers.has(p[0]));
 
@@ -1607,7 +2233,7 @@
               pairingCounts[pair1Key] = (pairingCounts[pair1Key] || 0) + 1;
               pairingCounts[pair2Key] = (pairingCounts[pair2Key] || 0) + 1;
               
-              // ペアの組み合わせ履歴を更新
+              // 更新配对组合历史
               pairingHistory[pair1Key].push({
                 round: roundNumber,
                 opponent: pair2Key,
@@ -1624,8 +2250,8 @@
               b.forEach(player => playCountMap[player[0]]++);
 
               const pairingTypeText = pair1Type === pair2Type ?
-                (pair1Type === 'men' ? '男子ダブルス' :
-                 pair1Type === 'women' ? '女子ダブルス' : 'ミックスダブルス') : '混合';
+                (pair1Type === 'men' ? '男双' :
+                 pair1Type === 'women' ? '女双' : '混双') : '混合';
 
               html += createMatchRow(courtNumber, a, b, diff, pair1Type, pair2Type, pairingTypeText);
 
@@ -1649,12 +2275,12 @@
           if (remainingPlayers.length > 0) {
             remainingPlayersList.push(...remainingPlayers);
             html += `<tr>
-              <td>コート ${courtNumber}</td>
-              <td colspan="3">自由練習 <span class="remaining-players">(余り: ${remainingPlayers.join(', ')})</span></td>
-              <td>なし</td>
+              <td>场地 ${courtNumber}</td>
+              <td colspan="3">自由练习 <span class="remaining-players">(剩余: ${remainingPlayers.join(', ')})</span></td>
+              <td>无</td>
             </tr>`;
           } else {
-            html += `<tr><td>コート ${courtNumber}</td><td colspan="3">自由練習</td><td>なし</td></tr>`;
+            html += `<tr><td>场地 ${courtNumber}</td><td colspan="3">自由练习</td><td>无</td></tr>`;
           }
 
           roundData.courts.push({
@@ -1667,7 +2293,7 @@
         }
 
         if (remainingPlayersList.length > 0) {
-          html += `<p class="remaining-players">未割り当てプレイヤー: ${[...new Set(remainingPlayersList)].join(', ')}</p>`;
+          html += `<p class="remaining-players">未分配球员: ${[...new Set(remainingPlayersList)].join(', ')}</p>`;
         }
 
         html += "</table>";
@@ -1680,7 +2306,7 @@
       if (output) output.innerHTML = fullHtml;
       initializeCourtDynamics();
 
-      // 共有用データを保存
+      // 保存分享数据
       currentShareData = {
         court: courtCount,
         rounds: totalRounds,
@@ -1697,7 +2323,8 @@
           date: document.getElementById("eventDate").value,
           time: document.getElementById("eventTime").value
         },
-        registeredPlayers: registeredPlayers
+        registeredPlayers: registeredPlayers,
+        teams: teams
       };
 
       return fullHtml;
@@ -1705,10 +2332,10 @@
 
     function getPairingTypeName(type) {
       switch(type) {
-        case 'any': return 'ランダム';
-        case 'mix': return 'ミックスダブルス';
-        case 'men': return '男子ダブルス';
-        case 'women': return '女子ダブルス';
+        case 'any': return '随机';
+        case 'mix': return '混双';
+        case 'men': return '男双';
+        case 'women': return '女双';
         default: return '';
       }
     }
@@ -1730,10 +2357,10 @@
       roundInput.type = 'number';
       roundInput.id = `restRound-${restId}`;
       roundInput.min = '1';
-      roundInput.placeholder = '休憩ラウンド';
+      roundInput.placeholder = '休息轮次';
 
       const removeBtn = document.createElement('button');
-      removeBtn.textContent = '削除';
+      removeBtn.textContent = '删除';
       removeBtn.onclick = function() {
         container.removeChild(restItem);
         restSettings = restSettings.filter(item => item.id !== restId);
@@ -1768,10 +2395,10 @@
       roundInput.type = 'number';
       roundInput.id = `fixedPairRound-${pairId}`;
       roundInput.min = '1';
-      roundInput.placeholder = 'ラウンド番号';
+      roundInput.placeholder = '轮次编号';
 
       const removeBtn = document.createElement('button');
-      removeBtn.textContent = '削除';
+      removeBtn.textContent = '删除';
       removeBtn.onclick = function() {
         container.removeChild(pairItem);
         fixedPairs = fixedPairs.filter(item => item.id !== pairId);
@@ -1804,10 +2431,10 @@
       roundInput.type = 'number';
       roundInput.id = `joinRoundRound-${joinRoundId}`;
       roundInput.min = '1';
-      roundInput.placeholder = '参加開始ラウンド';
+      roundInput.placeholder = '开始参加的轮次';
 
       const removeBtn = document.createElement('button');
-      removeBtn.textContent = '削除';
+      removeBtn.textContent = '删除';
       removeBtn.onclick = function() {
         container.removeChild(joinRoundItem);
         joinRoundSettings = joinRoundSettings.filter(item => item.id !== joinRoundId);
@@ -1829,7 +2456,7 @@
 
       const allPlayers = names.filter(name => name.trim() !== '');
 
-      // 休憩設定のプレイヤー選択リストを更新
+      // 更新休息设置的球员选择列表
       const restSelects = document.querySelectorAll('select[id^="restPlayer-"]');
       restSelects.forEach(select => {
         const selectedValues = Array.from(select.selectedOptions).map(option => option.value);
@@ -1848,7 +2475,7 @@
         });
       });
       
-      // 固定ペアのプレイヤー選択リストを更新
+      // 更新固定配对的球员选择列表
       const pairSelects1 = document.querySelectorAll('select[id^="fixedPairPlayer1-"]');
       const pairSelects2 = document.querySelectorAll('select[id^="fixedPairPlayer2-"]');
       
@@ -1876,7 +2503,7 @@
         if (currentValue) select.value = currentValue;
       });
       
-      // 参加ROUNDのプレイヤー選択リストを更新
+      // 更新参加轮次的球员选择列表
       const joinRoundSelects = document.querySelectorAll('select[id^="joinRoundPlayer-"]');
       
       joinRoundSelects.forEach(select => {
@@ -1942,13 +2569,13 @@
         }
       });
       
-      // 参加ROUND設定をプレイヤー情報に反映
+      // 将参加轮次设置反映到球员信息中
       registeredPlayers.forEach(player => {
         const setting = joinRoundSettings.find(s => s.player === player.name);
         if (setting) {
           player.joinRound = setting.round;
         } else {
-          // 設定がない場合はデフォルトで1ラウンド目から参加
+          // 没有设置时默认从第1轮开始参加
           player.joinRound = 1;
         }
       });
@@ -1988,7 +2615,7 @@
 
         html += '<div class="court-box">';
         html += `<div class="court-title">
-          <span>コート ${courtNumber}</span>
+          <span>场地 ${courtNumber}</span>
           <div class="court-round-control">
             <button onclick="changeCourtRound(${courtNumber}, -1)">◀</button>
             <input type="number" id="courtRoundInput-${courtNumber}"
@@ -2000,8 +2627,8 @@
 
         if (!courtData || courtData.isFreePractice) {
           const remaining = courtData?.members?.length > 0 ?
-            `<span class="free-practice">(余り: ${courtData.members.join(', ')})</span>` : '';
-          html += '<ul class="member-list"><li class="free-practice">自由練習 ' + remaining + '</li></ul>';
+            `<span class="free-practice">(剩余: ${courtData.members.join(', ')})</span>` : '';
+          html += '<ul class="member-list"><li class="free-practice">自由练习 ' + remaining + '</li></ul>';
         } else {
           html += '<ul class="member-list">';
           courtData.members.forEach(member => {
@@ -2078,7 +2705,7 @@
         const playerGenders = document.getElementById("playerGenders").value.trim();
         const playerJoinRounds = document.getElementById("playerJoinRounds").value.trim();
 
-        // イベント情報を取得
+        // 获取活动信息
         const eventName = document.getElementById("eventName").value.trim();
         const eventLocation = document.getElementById("eventLocation").value.trim();
         const eventDate = document.getElementById("eventDate").value;
@@ -2098,14 +2725,15 @@
           restSettings: restSettings,
           fixedPairs: fixedPairs,
           joinRoundSettings: joinRoundSettings,
-          // イベント情報を追加
+          // 添加活动信息
           eventInfo: {
             name: eventName,
             location: eventLocation,
             date: eventDate,
             time: eventTime
           },
-          registeredPlayers: registeredPlayers
+          registeredPlayers: registeredPlayers,
+          teams: teams
         };
 
         const encodedData = encodeURIComponent(JSON.stringify(data));
@@ -2114,8 +2742,8 @@
         document.getElementById("shareLink").value = shareURL;
         return true;
       } catch (error) {
-        console.error("シェアリンク生成エラー:", error);
-        alert("シェアリンクの生成に失敗しました");
+        console.error("生成分享链接错误:", error);
+        alert("生成分享链接失败");
         return false;
       }
     }
@@ -2125,7 +2753,7 @@
       linkInput.select();
       linkInput.setSelectionRange(0, 99999);
       document.execCommand("copy");
-      alert("リンクをコピーしました！");
+      alert("链接已复制！");
     }
 
     function loadRestSettings(settings) {
@@ -2192,6 +2820,7 @@
         eventDate: document.getElementById("eventDate").value,
         eventTime: document.getElementById("eventTime").value,
         registeredPlayers: registeredPlayers,
+        teams: teams,
         teamDivisionData: {
           courtCount: document.getElementById("courtCount").value,
           totalRounds: document.getElementById("totalRounds").value,
@@ -2206,13 +2835,13 @@
       };
 
       localStorage.setItem('badmintonTeamToolData', JSON.stringify(data));
-      alert('データを保存しました');
+      alert('数据已保存');
     }
 
     function loadData() {
       const savedData = localStorage.getItem('badmintonTeamToolData');
       if (!savedData) {
-        alert('保存されたデータが見つかりません');
+        alert('未找到保存的数据');
         return;
       }
 
@@ -2227,6 +2856,12 @@
         if (data.registeredPlayers) {
           registeredPlayers = data.registeredPlayers;
           updateRegisteredPlayersList();
+        }
+
+        if (data.teams) {
+          teams = data.teams;
+          updateTeamList();
+          updateTeamSelector();
         }
 
         if (data.teamDivisionData) {
@@ -2251,10 +2886,10 @@
           }
         }
 
-        alert('データを読み込みました');
+        alert('数据已加载');
       } catch (error) {
-        console.error('データ読み込みエラー:', error);
-        alert('データの読み込みに失敗しました');
+        console.error('数据加载错误:', error);
+        alert('加载数据失败');
       }
     }
 
@@ -2265,6 +2900,7 @@
         eventDate: document.getElementById("eventDate").value,
         eventTime: document.getElementById("eventTime").value,
         registeredPlayers: registeredPlayers,
+        teams: teams,
         teamDivisionData: {
           courtCount: document.getElementById("courtCount").value,
           totalRounds: document.getElementById("totalRounds").value,
@@ -2287,7 +2923,6 @@
       URL.revokeObjectURL(url);
     }
 
-    
     function importData(event) {
       const file = event.target.files[0];
       if (!file) return;
@@ -2305,6 +2940,12 @@
           if (data.registeredPlayers) {
             registeredPlayers = data.registeredPlayers;
             updateRegisteredPlayersList();
+          }
+
+          if (data.teams) {
+            teams = data.teams;
+            updateTeamList();
+            updateTeamSelector();
           }
 
           if (data.teamDivisionData) {
@@ -2329,10 +2970,10 @@
             }
           }
 
-          alert('データをインポートしました');
+          alert('数据已导入');
         } catch (error) {
-          console.error('インポートエラー:', error);
-          alert('ファイルの読み込みに失敗しました');
+          console.error('导入错误:', error);
+          alert('读取文件失败');
         }
       };
       reader.readAsText(file);
@@ -2347,19 +2988,19 @@
         }
 
         // 1. 准备数据
-        let csvContent = "データ,内容\n";
+        let csvContent = "数据,内容\n";
 
-        // イベント情報
+        // 活动信息
         if (currentShareData.eventInfo) {
           const ei = currentShareData.eventInfo;
-          csvContent += `イベント名,${ei.name || ''}\n`;
-          csvContent += `場所,${ei.location || ''}\n`;
-          csvContent += `日付,${ei.date || ''}\n`;
-          csvContent += `時間,${ei.time || ''}\n\n`;
+          csvContent += `活动名称,${ei.name || ''}\n`;
+          csvContent += `地点,${ei.location || ''}\n`;
+          csvContent += `日期,${ei.date || ''}\n`;
+          csvContent += `时间,${ei.time || ''}\n\n`;
         }
 
-        // プレイヤーリスト
-        csvContent += "プレイヤーリスト\n名前,レベル,性別,参加ROUND\n";
+        // 球员列表
+        csvContent += "球员列表\n姓名,水平,性别,参加轮次\n";
         const names = currentShareData.names.split('\n');
         const levels = currentShareData.levels.split('\n');
         const genders = currentShareData.genders.split('\n');
@@ -2369,38 +3010,51 @@
           const name = names[i].trim();
           if (name) {
             const level = levels[i] || '3';
-            const gender = genders[i] === 'male' ? '男性' : genders[i] === 'female' ? '女性' : genders[i] || '男性';
+            const gender = genders[i] === 'male' ? '男' : genders[i] === 'female' ? '女' : genders[i] || '男';
             const joinRound = joinRounds[i] || '1';
             csvContent += `${name},${level},${gender},${joinRound}\n`;
           }
         }
         csvContent += "\n";
 
-        // ラウンド情報
+        // 团队信息
+        if (currentShareData.teams && currentShareData.teams.length > 0) {
+          csvContent += "团队信息\n";
+          currentShareData.teams.forEach(team => {
+            csvContent += `团队名称,${team.name}\n`;
+            csvContent += "成员,水平,性别\n";
+            team.members.forEach(member => {
+              csvContent += `${member.name},${member.level},${member.gender === 'male' ? '男' : '女'}\n`;
+            });
+            csvContent += "\n";
+          });
+        }
+
+        // 轮次信息
         allRoundData.forEach(round => {
-          csvContent += `第 ${round.roundNumber} ラウンド\n`;
-          csvContent += "コート,チームA,チームB,A-B差,タイプ\n";
+          csvContent += `第 ${round.roundNumber} 轮\n`;
+          csvContent += "场地,队伍A,队伍B,A-B差,类型\n";
 
           const restingPlayers = getRestingPlayers(round.roundNumber);
           if (restingPlayers.length > 0) {
-            csvContent += `休憩中のプレイヤー,${restingPlayers.join(', ')},,,\n`;
+            csvContent += `休息中的球员,${restingPlayers.join(', ')},,,\n`;
           }
 
-          // 参加プレイヤーを表示
+          // 显示参加球员
           const joiningPlayers = currentShareData.registeredPlayers.filter(p => 
             p.joinRound <= round.roundNumber && !restingPlayers.includes(p.name)
           );
-          csvContent += `参加プレイヤー,${joiningPlayers.map(p => p.name).join(', ')},,,\n`;
+          csvContent += `参加球员,${joiningPlayers.map(p => p.name).join(', ')},,,\n`;
 
           round.courts.forEach(court => {
             if (court.isFreePractice) {
               const members = court.members.length > 0 ? ` (${court.members.join(', ')})` : '';
-              csvContent += `コート ${court.courtNumber},自由練習${members},,,\n`;
+              csvContent += `场地 ${court.courtNumber},自由练习${members},,,\n`;
             } else {
               const teamA = court.members.slice(0, 2).join(" & ");
               const teamB = court.members.slice(2, 4).join(" & ");
 
-              // 计算等级差
+              // 计算水平差
               const allPlayers = names.map((name, i) => ({
                 name: name.trim(),
                 level: parseInt(levels[i]) || 3
@@ -2426,16 +3080,16 @@
 
               let pairType = '';
               if (player1 && player2 && player3 && player4) {
-                const type1 = player1.gender === 'male' && player2.gender === 'male' ? '男子' :
-                             player1.gender === 'female' && player2.gender === 'female' ? '女子' : 'ミックス';
-                const type2 = player3.gender === 'male' && player4.gender === 'male' ? '男子' :
-                             player3.gender === 'female' && player4.gender === 'female' ? '女子' : 'ミックス';
+                const type1 = player1.gender === 'male' && player2.gender === 'male' ? '男双' :
+                             player1.gender === 'female' && player2.gender === 'female' ? '女双' : '混双';
+                const type2 = player3.gender === 'male' && player4.gender === 'male' ? '男双' :
+                             player3.gender === 'female' && player4.gender === 'female' ? '女双' : '混双';
                 pairType = type1 === type2 ?
-                          (type1 === '男子' ? '男子ダブルス' :
-                           type1 === '女子' ? '女子ダブルス' : 'ミックスダブルス') : '混合';
+                          (type1 === '男双' ? '男双' :
+                           type1 === '女双' ? '女双' : '混双') : '混合';
               }
 
-              // 固定ペアかどうかをチェック
+              // 检查是否为固定配对
               const isFixedPair = fixedPairs.some(fp => 
                 fp.round === round.roundNumber && 
                 ((fp.player1 === court.members[0] && fp.player2 === court.members[1]) || 
@@ -2443,10 +3097,10 @@
               );
               
               if (isFixedPair) {
-                pairType += ' (固定ペア)';
+                pairType += ' (固定配对)';
               }
 
-              csvContent += `コート ${court.courtNumber},${teamA},${teamB},${levelDiff},${pairType}\n`;
+              csvContent += `场地 ${court.courtNumber},${teamA},${teamB},${levelDiff},${pairType}\n`;
             }
           });
           csvContent += "\n";
@@ -2459,7 +3113,7 @@
         link.href = url;
 
         const eventName = currentShareData.eventInfo?.name || 'badminton';
-        link.download = `${eventName.replace(/[^a-z0-9]/gi, '_')}_チーム分け.csv`;
+        link.download = `${eventName.replace(/[^a-z0-9]/gi, '_')}_团队分组.csv`;
 
         // 3. 触发下载
         document.body.appendChild(link);
@@ -2479,7 +3133,7 @@
         <!DOCTYPE html>
         <html>
         <head>
-          <title>バドミントンチーム分け結果 - ${getPairingTypeName(pairingType)}</title>
+          <title>羽毛球分组结果 - ${getPairingTypeName(pairingType)}</title>
           <style>
             body {
               font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -2564,9 +3218,9 @@
           </style>
         </head>
         <body>
-          <h1>バドミントンチーム分け結果 - ${getPairingTypeName(pairingType)}</h1>
+          <h1>羽毛球分组结果 - ${getPairingTypeName(pairingType)}</h1>
           <div id="output"></div>
-          <button onclick="window.print()" style="margin-top: 20px; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">印刷</button>
+          <button onclick="window.print()" style="margin-top: 20px; padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">打印</button>
         </body>
         </html>
       `;
@@ -2621,7 +3275,7 @@
           document.getElementById("playerGenders").value = data.genders || "";
           document.getElementById("playerJoinRounds").value = data.joinRounds || "";
 
-          // イベント情報を復元
+          // 恢复活动信息
           if (data.eventInfo) {
             document.getElementById("eventName").value = data.eventInfo.name || "";
             document.getElementById("eventLocation").value = data.eventInfo.location || "";
@@ -2632,6 +3286,12 @@
           if (data.registeredPlayers) {
             registeredPlayers = data.registeredPlayers;
             updateRegisteredPlayersList();
+          }
+
+          if (data.teams) {
+            teams = data.teams;
+            updateTeamList();
+            updateTeamSelector();
           }
 
           if (data.restSettings) {
@@ -2654,18 +3314,18 @@
           document.querySelectorAll('.tab').forEach(tab => {
             tab.classList.remove('active');
           });
-          document.querySelector('.tab-container button:nth-child(2)').classList.add('active');
+          document.querySelector('.tab-container button:nth-child(3)').classList.add('active');
 
           generateRounds('any');
         } catch (e) {
-          console.error("データ読み込みエラー:", e);
-          alert("共有データの読み込みに失敗しました");
+          console.error("数据加载错误:", e);
+          alert("加载分享数据失败");
         }
       }
 
       document.getElementById("playerNames").addEventListener("input", updatePlayerSelects);
 
-      // レベルスライダーの初期化
+      // 初始化水平滑块
       initializeLevelSlider();
 
       loadData();
